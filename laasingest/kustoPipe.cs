@@ -21,6 +21,7 @@ namespace laasingest
         [FunctionName("kustoPipe")]
         public static void Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, ILogger log, Microsoft.Azure.WebJobs.ExecutionContext context)
         {
+            bool allGood = true;
             var config = new ConfigurationBuilder()
               .SetBasePath(context.FunctionAppDirectory)
               .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
@@ -90,13 +91,14 @@ namespace laasingest
                             KustoHelper.uploadBlobToKusto(newBlob, config["ingestionconn"], "annandale", destTable, log);
 
                             // WAit for ingestion
-                            log.LogInformation("SLeeping for 15 seconds for ingestion");
+                            log.LogInformation("Sleeping for 15 seconds for ingestion");
                             Thread.Sleep(15000); ;
                             
                         }
                         else
                         {
                             log.LogError("Unable to parse destination table");
+                            allGood = false;
                         }
 
 
@@ -104,8 +106,13 @@ namespace laasingest
                     catch (Exception queryErr)
                     {
                         log.LogError(queryErr.ToString());
+                        allGood = false;
                     }
                     log.LogInformation("Complete");
+                    if (!allGood)
+                    {
+                        throw new Exception("Had at least one issue");
+                    }
 
                 }
             }

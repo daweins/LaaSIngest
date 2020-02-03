@@ -39,6 +39,7 @@ namespace laasingest
             catch(Exception err)
             {
                 log.LogError(err.ToString());
+                throw new Exception(err.ToString());
             }
         }
     }
