@@ -13,7 +13,7 @@ namespace laasingest
     public static class ingestjmeter
     {
         [FunctionName("IngestJmeter")]
-        public static void Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
+        public static void Run([TimerTrigger("0 * * * * *")]TimerInfo myTimer, ILogger log, ExecutionContext context)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace laasingest
                 log.LogInformation($"Got the container: uri= {container.Uri}  name= {container.Name} ");
                 foreach (CloudBlockBlob curBlob in container.ListBlobs())
                 {
-                    KustoHelper.uploadBlobToKusto(curBlob, config["ingestionconn"], "annandale", "jmeteringest",log);
+                    KustoHelper.uploadBlobToKusto(curBlob, config["ingestionconn"], "annandale", "jmeterIngest",log);
                     
 
                 }
