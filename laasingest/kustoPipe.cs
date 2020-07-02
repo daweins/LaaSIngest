@@ -80,7 +80,14 @@ namespace laasingest
                                     {
                                         for (int curCol = 0; curCol < result.FieldCount; curCol++)
                                         {
-                                            csvWriter.WriteField(result[curCol]);
+                                            try
+                                            {
+                                                csvWriter.WriteField(result[curCol]);
+                                            }
+                                            catch(Exception e)
+                                            {
+                                                log.logInformation($"Error with fieldNum {curCol}, skipping");   
+                                            }
                                         }
                                         csvWriter.NextRecord();
                                     }
