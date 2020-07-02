@@ -86,7 +86,7 @@ namespace laasingest
                                             }
                                             catch(Exception e)
                                             {
-                                                log.logInformation($"Error with fieldNum {curCol}, skipping");   
+                                                log.LogInformation($"Error with fieldNum {curCol}, skipping");   
                                             }
                                         }
                                         csvWriter.NextRecord();
