@@ -82,12 +82,21 @@ namespace laasingest
                                         {
                                             try
                                             {
-                                                log.LogInformation($"Writing fieldNum {curCol}, with value {result[curCol]}");
-                                                csvWriter.WriteField(result[curCol]);
+                                                if(results[curCol] != null)
+                                                {
+                                                    resultString = results[curCol].ToString();  
+                                                    log.LogInformation($"Writing fieldNum {curCol}, with value {resultString}");
+                                                    csvWriter.WriteField(resultString);
+                                                }
+                                                else
+                                                {
+                                                    log.logInformation($"FieldNum {curCol} is null - skipping");    
+                                                }
+                                                
                                             }
                                             catch(Exception e)
                                             {
-                                                log.LogInformation($"Error with fieldNum {curCol}, skipping");   
+                                                log.LogError($"Error with fieldNum {curCol}: {err.ToString()}, skipping");   
                                             }
                                         }
                                         csvWriter.NextRecord();
