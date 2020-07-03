@@ -84,7 +84,7 @@ namespace laasingest
                                             {
                                                 if(result[curCol] != null)
                                                 {
-                                                    resultString = result[curCol].ToString();  
+                                                    string resultString = result[curCol].ToString();  
                                                     log.LogInformation($"Writing fieldNum {curCol}, with value {resultString}");
                                                     csvWriter.WriteField(resultString);
                                                 }
