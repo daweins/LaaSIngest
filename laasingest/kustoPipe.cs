@@ -82,7 +82,7 @@ namespace laasingest
                                         {
                                             try
                                             {
-                                                log.logInformation($"Writing fieldNum {curCol}, with value {result[curCol]}");
+                                                log.LogInformation($"Writing fieldNum {curCol}, with value {result[curCol]}");
                                                 csvWriter.WriteField(result[curCol]);
                                             }
                                             catch(Exception e)
