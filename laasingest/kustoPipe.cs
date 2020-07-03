@@ -90,11 +90,11 @@ namespace laasingest
                                                 }
                                                 else
                                                 {
-                                                    log.logInformation($"FieldNum {curCol} is null - skipping");    
+                                                    log.LogInformation($"FieldNum {curCol} is null - skipping");    
                                                 }
                                                 
                                             }
-                                            catch(Exception e)
+                                            catch(Exception err)
                                             {
                                                 log.LogError($"Error with fieldNum {curCol}: {err.ToString()}, skipping");   
                                             }
